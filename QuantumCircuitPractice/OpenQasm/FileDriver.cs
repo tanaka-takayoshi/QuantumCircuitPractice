@@ -27,7 +27,7 @@ namespace Microsoft.Quantum.Samples.OpenQasm
             var output = "output.txt";
             File.WriteAllText(input, QasmLog.ToString(), Encoding.ASCII);
 
-            var python = @"C:\Users\TanakaTakayoshi\AppData\Local\Programs\Python\Python37\python.exe";
+            var python = @"python.exe";
             var arguments = $"run.py";
 
             var processStart = new ProcessStartInfo()
