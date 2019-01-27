@@ -21,3 +21,7 @@ Right now, we have to specifythe how many Qubits you're using in the Q# code exp
 ```cs
 public override int QBitCount => 2;
 ```
+
+## Code
+
+OpenQASMDriver and measurement sample Q# code is copied from [Microsoft Quantum Sample code](https://github.com/Microsoft/Quantum/tree/release/v0.3.1810/Samples).
