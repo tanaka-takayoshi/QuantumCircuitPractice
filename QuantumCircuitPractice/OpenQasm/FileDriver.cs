@@ -10,10 +10,12 @@ namespace Microsoft.Quantum.Samples.OpenQasm
 {
     public class FileDriver : OpenQasmDriver
     {
-        //Use 20 for now
-        public override int QBitCount => 2;
-
+        private readonly int qbitCount;
+        
         public override string Name => "File";
+
+        public FileDriver(int qbitCount) : base(qbitCount) => this.qbitCount = qbitCount;
+        public FileDriver() : this(20) { }
 
         protected override IEnumerable<Result> RunOpenQasm(StringBuilder qasm, int runs)
         {
@@ -24,7 +26,7 @@ namespace Microsoft.Quantum.Samples.OpenQasm
         public void Draw()
         {
             var input = "input.txt";
-            var output = "output.txt";
+            var output = "output.jpg";
             File.WriteAllText(input, QasmLog.ToString(), Encoding.ASCII);
 
             var python = @"python.exe";
@@ -51,16 +53,16 @@ namespace Microsoft.Quantum.Samples.OpenQasm
             // process.BeginOutputReadLine();
             process.WaitForExit();
 
-            if (File.Exists(output))
-            {
-                var result = File.ReadAllText(output);
-                Console.Write(result);
-                Console.WriteLine();
-            }
-            else
-            {
-                Console.WriteLine("Missing output in outputfile");
-            }
+            //if (File.Exists(output))
+            //{
+            //    var result = File.ReadAllText(output);
+            //    Console.Write(result);
+            //    Console.WriteLine();
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Missing output in outputfile");
+            //}
         }
     }
 }

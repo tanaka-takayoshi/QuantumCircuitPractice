@@ -20,15 +20,17 @@ namespace Microsoft.Quantum.Samples.OpenQasm
     /// </summary>
     public abstract class OpenQasmDriver : SimulatorBase
     {
-        public OpenQasmDriver(IQubitManager qubitManager = null) : base(qubitManager)
+
+        public OpenQasmDriver(int qbitCount, IQubitManager qubitManager = null) : base(qubitManager)
         {
+            QBitCount = qbitCount;
             QasmLog.AppendLine("include \"qelib1.inc\";");
-            QasmLog.AppendLine($"qreg q[{QBitCount}];");
-            QasmLog.AppendLine($"creg c[{QBitCount}];");
+            QasmLog.AppendLine($"qreg q[{qbitCount}];");
+            QasmLog.AppendLine($"creg c[{qbitCount}];");
         }
 
         protected abstract IEnumerable<Result> RunOpenQasm(StringBuilder qasm, int runs);
-        public abstract int QBitCount { get; }
+        public int QBitCount { get; }
 
         /// <summary>
         /// Processes Hadamard gate

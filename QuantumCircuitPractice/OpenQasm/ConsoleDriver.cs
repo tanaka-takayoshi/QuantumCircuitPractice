@@ -5,14 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Quantum.Simulation.Common;
 using Microsoft.Quantum.Simulation.Core;
 
 namespace Microsoft.Quantum.Samples.OpenQasm
 {
     public class ConsoleDriver : OpenQasmDriver
     {
-        //Use 20 for now
-        public override int QBitCount => 20;
+        public ConsoleDriver(int qbitCount, IQubitManager qubitManager = null) : base(qbitCount, qubitManager)
+        {
+        }
 
         public override string Name => "Console";
 

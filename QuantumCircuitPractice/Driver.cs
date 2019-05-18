@@ -9,8 +9,8 @@ namespace QuantumCircuitPractice
     {
         static void Main(string[] args)
         {
-            var factory = new FileDriver();
-            var result = MeasurementBellBasis.Run(factory).Result;
+            var factory = new FileDriver(3);
+            var result = SomeAdjointOperation.Run(factory).Result;
             factory.Draw();
         }
     }

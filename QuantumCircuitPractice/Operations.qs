@@ -66,4 +66,50 @@
         // Finally, we return the result of the measurement.
         return result;
     }
+
+	operation RunTeleoport() : Unit {
+		using ((msg, there) = (Qubit(), Qubit())) {
+			Teleport(msg, there);
+		}
+	}
+
+	operation Teleport(msg : Qubit, there : Qubit) : Unit {
+		using (here = Qubit()) {
+			H(here);
+			CNOT(here, there);
+			CNOT(msg, here);
+			H(msg);
+			// Measure out the entanglement
+			if (M(msg) == One)  { Z(there); }
+			if (M(here) == One) { X(there); }
+		}
+	}
+
+	operation Test() : Unit {
+		using(qubits = Qubit[2]) {
+			H(qubits[0]);
+			CNOT(qubits[0], qubits[1]);
+		}
+	}
+
+	operation Test2() : Unit {
+		using(qubits = Qubit[3]) {
+			H(qubits[0]);
+			CNOT(qubits[0], qubits[1]);
+			CNOT(qubits[0], qubits[2]);
+			let (res1, res2) = (M(qubits[1]), M(qubits[2]));
+			Adjoint SomeAdjointOperation(qubits[2], qubits[1]);
+		}
+	}
+
+	operation SomeAdjointOperation(qubit1 : Qubit, qubit2 : Qubit) : Unit {
+    body (...) {
+        H(qubit1);
+        CNOT(qubit1, qubit2);
+    }
+
+    adjoint auto; 
+    controlled auto; 
+    controlled adjoint auto; 
+}
 }

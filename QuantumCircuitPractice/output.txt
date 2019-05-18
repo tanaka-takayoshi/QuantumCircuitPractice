@@ -1,9 +1,27 @@
-        ┌───┐     ┌─┐   
-q_0: |0>┤ H ├──■──┤M├───
-        └───┘┌─┴─┐└╥┘┌─┐
-q_1: |0>─────┤ X ├─╫─┤M├
-             └───┘ ║ └╥┘
- c_0: 0 ═══════════╩══╬═
-                      ║ 
- c_1: 0 ══════════════╩═
-                        
+% \documentclass[preview]{standalone}
+% If the image is too large to fit on this documentclass use
+\documentclass[draft]{beamer}
+% img_width = 6, img_depth = 7
+\usepackage[size=custom,height=10,width=13,scale=0.7]{beamerposter}
+% instead and customize the height and width (in cm) to fit.
+% Large images may run out of memory quickly.
+% To fix this use the LuaLaTeX compiler, which dynamically
+% allocates memory.
+\usepackage[braket, qm]{qcircuit}
+\usepackage{amsmath}
+\pdfmapfile{+sansmathaccent.map}
+% \usepackage[landscape]{geometry}
+% Comment out the above line if using the beamer documentclass.
+\begin{document}
+\begin{equation*}
+    \Qcircuit @C=0.5em @R=1.0em @!R {
+	 	\lstick{q_{0}: \ket{0}} & \qw & \qw & \ctrl{2} & \gate{H} & \meter & \qw & \qw\\
+	 	\lstick{q_{1}: \ket{0}} & \qw & \targ & \qw & \qw & \qw & \qw & \qw\\
+	 	\lstick{q_{2}: \ket{0}} & \gate{H} & \ctrl{-1} & \targ & \meter & \qw & \qw & \qw\\
+	 	\lstick{c_{0}: 0} & \cw & \cw & \cw & \cw & \cw \cwx[-3] & \cw & \cw\\
+	 	\lstick{c_{1}: 0} & \cw & \cw & \cw & \cw & \cw & \cw & \cw\\
+	 	\lstick{c_{2}: 0} & \cw & \cw & \cw & \cw \cwx[-3] & \cw & \cw & \cw\\
+	 }
+\end{equation*}
+
+\end{document}
